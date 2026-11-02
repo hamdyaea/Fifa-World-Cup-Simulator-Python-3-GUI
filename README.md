@@ -1,36 +1,15 @@
-[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)  
+# FIFA World Cup 2018 Simulator
 
+**Developer:** Hamdy Abou El Anein  
+**Contact:** info@daylightlinux.ch  
+**License:** GPL v3 (see LICENSE).
 
-# Fifa World Cup Simulator
-
-## What's this game ?  
-
-This game simulate all the results of a Football world cup  
-
-![Screenshot](screenshot.png)  
-
-
-## What you need to make it work :  
-
-This game is made for Python 3.  
-
-Install all the packages for : Python 3.  
-
-easygui at least version 0.98  
-
-```sh
-sudo python3 -m pip install --upgrade easygui  
-```  
-
-
-## How to launch this game :  
+An entertainment-only Python 3/Tkinter simulator using the **historical 2018 group roster**, not current national-team rankings. Eight groups produce sixteen qualifiers and a 15-match fictional knockout tournament. A seed allows reproducible simulations for tests.
 
 ```sh
 python3 WorldCup.py
-```  
+python3 WorldCup.py --text --seed 42
+python3 -m unittest discover -s tests -v
+```
 
-
-## Developer - Author  
-
-Hamdy Abou El Anein  
-
+The original EasyGUI implementation is preserved on the [old branch](https://github.com/hamdyaea/Fifa-World-Cup-Simulator-Python-3-GUI/tree/old). Outcomes are random and do not predict real sporting results.
