@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 """Entertainment-only simulator using the 2018 World Cup group roster."""
 from __future__ import annotations
+from pathlib import Path
 import argparse
 import random
 import tkinter as tk
@@ -62,13 +63,19 @@ def main() -> None:
     root.geometry("720x620")
     frame = ttk.Frame(root, padding=12)
     frame.pack(fill="both", expand=True)
+    artwork = tk.PhotoImage(file=str(Path(__file__).resolve().parent / "images/beginIMG-ui.png"))
+    illustration = tk.Label(frame, image=artwork)
+    illustration.image = artwork
+    illustration.pack()
+    result_image = tk.PhotoImage(file=str(Path(__file__).resolve().parent / "images/winnerIMG-ui.png"))
     output = tk.Text(frame, wrap="word", font=("monospace", 10))
     output.pack(fill="both", expand=True)
     def refresh():
+        illustration.configure(image=result_image)
         output.delete("1.0", "end")
         output.insert("1.0", run())
     ttk.Button(frame, text="Simulate again", command=refresh).pack(pady=8)
-    refresh()
+    output.insert("1.0", "Start the 2018 World Cup to see the qualifiers and knockout rounds.")
     root.mainloop()
 
 if __name__ == "__main__":
