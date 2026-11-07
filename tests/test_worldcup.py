@@ -2,7 +2,7 @@
 # Contact: info@daylightlinux.ch
 # SPDX-License-Identifier: GPL-3.0-only
 import unittest
-from WorldCup import GROUPS, simulate
+from WorldCup import GROUPS, simulate, tournament_stages
 
 class WorldCupTests(unittest.TestCase):
     def test_roster(self):
@@ -17,6 +17,16 @@ class WorldCupTests(unittest.TestCase):
     def test_rounds(self):
         _, lines = simulate(42)
         self.assertEqual(sum(" vs " in line for line in lines), 15)
+
+    def test_progressive_bracket(self):
+        for seed in range(100):
+            stages = tournament_stages(seed)
+            self.assertEqual([len(matches) for _, matches in stages[1:5]], [8, 4, 2, 1])
+            self.assertEqual(stages[-1][1], simulate(seed)[0])
+            for index in range(2, 5):
+                winners = {winner for a, b, winner in stages[index - 1][1]}
+                participants = {team for a, b, winner in stages[index][1] for team in (a, b)}
+                self.assertEqual(participants, winners)
 
 if __name__ == "__main__":
     unittest.main()
